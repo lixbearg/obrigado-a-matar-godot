@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://buoy4c8tbbhko"]
+
+[ext_resource type="PackedScene" uid="uid://cjv2yrs1wnxy0" path="res://scenes/player/player.tscn" id="1_iv2x6"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_nun2r"]
+[ext_resource type="PackedScene" uid="uid://cingtpaul0ae7" path="res://scenes/world/background.tscn" id="2_v085a"]
+[ext_resource type="PackedScene" uid="uid://bn8sdvmk417ej" path="res://scenes/control/hud.tscn" id="5_57kwt"]
+[ext_resource type="PackedScene" uid="uid://bcrwd86ixckph" path="res://scenes/enemy/enemy.tscn" id="5_otexj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df64g"]
+size = Vector2(6025.5, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04vge"]
+size = Vector2(49, 213)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_nun2r")
+
+[node name="Background" parent="." instance=ExtResource("2_v085a")]
+
+[node name="Player" parent="." instance=ExtResource("1_iv2x6")]
+position = Vector2(140, 195)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-9, -31)
+collision_mask = 0
+
+[node name="Floor" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3003, 256)
+shape = SubResource("RectangleShape2D_df64g")
+
+[node name="Left wall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(63, 126)
+shape = SubResource("RectangleShape2D_04vge")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_speed = 4.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_57kwt")]
+
+[node name="Enemy" parent="." instance=ExtResource("5_otexj")]
+position = Vector2(232, 188)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_otexj")]
+position = Vector2(281, 189)
+
+[node name="Enemy3" parent="." instance=ExtResource("5_otexj")]
+position = Vector2(335, 182)
