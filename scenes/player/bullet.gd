@@ -22,10 +22,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_area_entered(area):
-		if area is HitboxComponent:
-			var hitbox : HitboxComponent = area
-			var attack = Attack.new()
-			attack.attack_damage = attack_damage
-			attack.knockback_force = knockback_force
-			hitbox.damage(attack)
-			queue_free()
+	if area is HitboxComponent:
+		var hitbox : HitboxComponent = area
+		var attack = Attack.new()
+		attack.attack_damage = attack_damage
+		attack.knockback_force = knockback_force
+		hitbox.damage(attack)
+		queue_free()

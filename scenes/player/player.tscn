@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://cjv2yrs1wnxy0"]
+[gd_scene load_steps=25 format=3 uid="uid://cjv2yrs1wnxy0"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4fi5j"]
 [ext_resource type="Texture2D" uid="uid://dquo2bjy84oy7" path="res://assets/sprites/player/joao_crouch.png" id="2_gavhl"]
 [ext_resource type="Texture2D" uid="uid://c14bi0k3ed8x0" path="res://assets/sprites/player/joao_idle.png" id="3_pixtf"]
 [ext_resource type="Texture2D" uid="uid://cov0dd3y3foq0" path="res://assets/sprites/player/joao_walk.png" id="4_8tpti"]
 [ext_resource type="Texture2D" uid="uid://cjwx2imy3d6cw" path="res://assets/sprites/player/joao_shadow.png" id="4_rrxgl"]
+[ext_resource type="PackedScene" uid="uid://bons0287n5dwl" path="res://scenes/player/weapon.tscn" id="6_s0tcu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcofj"]
 atlas = ExtResource("2_gavhl")
@@ -171,5 +172,4 @@ shape = SubResource("RectangleShape2D_xsjyr")
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("4_rrxgl")
 
-[node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="Weapon" parent="." instance=ExtResource("6_s0tcu")]

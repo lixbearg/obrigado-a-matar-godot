@@ -1,39 +1,30 @@
 class_name Player
-extends CharacterBody2D
+extends Actor
 
-signal ammo_changed(value)
-
-@onready var BULLET = preload("res://scenes/player/bullet.tscn")
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var shadow = $Shadow
 @onready var reload_timer = $ReloadTimer
+@onready var weapon = $Weapon
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -350.0
-const WEAPON_POS_STANDING : Vector2i = Vector2i(15, 39)
-const WEAPON_POS_CROUCHING : Vector2i = Vector2i(27, 25)
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var floor_initial_position : int
 var player_facing_direction : int = 1
 var is_walking : bool = false
 var is_crouching : bool = false
-var ammo : int = 6
 
 
 func _ready():
 	GameManager.player = self
 	floor_initial_position = shadow.global_position.y
-	reload_timer.timeout.connect(_on_weapon_reloaded)
 
 
 func _physics_process(delta):
 	var input_axis = Input.get_axis("left", "right")
 
 	handle_movement(delta)
-	handle_jump(delta)
+	handle_jump()
 	handle_shooting()
 	update_animations(input_axis)
 
@@ -50,33 +41,19 @@ func handle_movement(delta):
 		is_walking = false
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	is_crouching = Input.is_action_pressed("crouch") and is_on_floor()
+	is_crouching = Input.is_action_pressed("crouch") and is_on_floor() and !direction
 
 	move_and_slide()
 
 
-func handle_jump(delta):
+func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 
 func handle_shooting():
-	if !reload_timer.is_stopped(): return
 	if Input.is_action_just_pressed("shoot"):
-		var bullet = BULLET.instantiate()
-		bullet.set_direction(player_facing_direction)
-		GameManager.add_object(bullet)
-		if is_crouching and !is_walking:
-			bullet.global_position.y = position.y - WEAPON_POS_CROUCHING.y
-			bullet.global_position.x = position.x + (player_facing_direction * WEAPON_POS_CROUCHING.x)
-		else:
-			bullet.global_position.y = position.y - WEAPON_POS_STANDING.y
-			bullet.global_position.x = position.x + (player_facing_direction * WEAPON_POS_STANDING.x)
-
-		ammo -= 1
-		if ammo == 0:
-			reload_weapon()
-		GameManager.update_ammo(ammo)
+		weapon.shoot(player_facing_direction, is_crouching)
 
 
 func update_animations(input_axis):
@@ -94,13 +71,3 @@ func update_animations(input_axis):
 
 	if not is_on_floor():
 		animated_sprite_2d.play("jump")
-
-
-func reload_weapon():
-	reload_timer.start()
-
-
-func _on_weapon_reloaded():
-	ammo = 6
-	ammo_changed.emit(ammo)
-	reload_timer.stop()
