@@ -5,10 +5,13 @@ extends Actor
 @onready var shadow = $Shadow
 @onready var reload_timer = $ReloadTimer
 @onready var weapon = $Weapon
+@onready var skin = $Skin
+
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -350.0
 
+var default_skin = preload("res://scenes/player/skins/joao_amorim.tres")
 var floor_initial_position : int
 var player_facing_direction : int = 1
 var is_walking : bool = false
@@ -18,6 +21,7 @@ var is_crouching : bool = false
 func _ready():
 	GameManager.player = self
 	floor_initial_position = shadow.global_position.y
+	skin.set_sprite_frames(default_skin)
 
 
 func _physics_process(delta):
@@ -58,16 +62,16 @@ func handle_shooting():
 
 func update_animations(input_axis):
 	if input_axis != 0 and !is_on_wall():
-		animated_sprite_2d.flip_h = input_axis < 0
+		skin.flip_h = input_axis < 0
 		player_facing_direction = input_axis
-		animated_sprite_2d.play("walk")
+		skin.play("walk")
 	elif is_crouching:
-		animated_sprite_2d.play("crouch")
+		skin.play("crouch")
 	else:
-		animated_sprite_2d.play("idle")
+		skin.play("idle")
 
 	shadow.global_position.x = global_position.x
 	shadow.global_position.y = floor_initial_position
 
 	if not is_on_floor():
-		animated_sprite_2d.play("jump")
+		skin.play("jump")
