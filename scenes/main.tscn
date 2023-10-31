@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://buoy4c8tbbhko"]
+[gd_scene load_steps=9 format=3 uid="uid://buoy4c8tbbhko"]
 
 [ext_resource type="PackedScene" uid="uid://cjv2yrs1wnxy0" path="res://scenes/player/player.tscn" id="1_iv2x6"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_nun2r"]
 [ext_resource type="PackedScene" uid="uid://cingtpaul0ae7" path="res://scenes/world/background.tscn" id="2_v085a"]
 [ext_resource type="PackedScene" uid="uid://bn8sdvmk417ej" path="res://scenes/control/hud.tscn" id="5_57kwt"]
 [ext_resource type="PackedScene" uid="uid://bcrwd86ixckph" path="res://scenes/enemy/enemy.tscn" id="5_otexj"]
+[ext_resource type="PackedScene" uid="uid://c4rns6uwmat1b" path="res://scenes/control/camera.tscn" id="6_51int"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df64g"]
 size = Vector2(6025.5, 61)
@@ -32,13 +33,7 @@ shape = SubResource("RectangleShape2D_df64g")
 position = Vector2(63, 126)
 shape = SubResource("RectangleShape2D_04vge")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-position_smoothing_speed = 4.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_57kwt")]
+[node name="HUD" parent="." instance=ExtResource("5_57kwt")]
 
 [node name="Enemy" parent="." instance=ExtResource("5_otexj")]
 position = Vector2(232, 188)
@@ -48,3 +43,7 @@ position = Vector2(281, 189)
 
 [node name="Enemy3" parent="." instance=ExtResource("5_otexj")]
 position = Vector2(335, 182)
+
+[node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_51int")]
+anchor_mode = 0
+player = NodePath("../Player")

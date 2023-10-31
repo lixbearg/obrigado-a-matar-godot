@@ -1,16 +1,13 @@
 extends Node2D
 
-@onready var hud = $CanvasLayer/HUD
+@onready var hud = $HUD.get_child(0)
 
 var enemies : Array[Node]
 
 
 func _ready():
+	GameManager.current_level = self
 	make_connections()
-
-
-func _process(delta):
-	$Camera2D.position.x = $Player.position.x - 80
 
 
 func make_connections():
@@ -27,4 +24,4 @@ func _on_ammo_changed(value):
 
 func _on_enemy_died(value):
 	$Player.update_money(value)
-	hud.update_money_counter($Player.money)
+	hud.update_money_counter(GameManager.current_money)

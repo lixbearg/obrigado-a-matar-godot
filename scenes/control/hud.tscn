@@ -3,7 +3,9 @@
 [ext_resource type="Theme" uid="uid://o4jrbf6ir4e8" path="res://assets/hud_theme.tres" id="1_7sllb"]
 [ext_resource type="Script" path="res://scenes/control/hud.gd" id="2_fdh4r"]
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HUDControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +19,7 @@ grow_vertical = 2
 theme = ExtResource("1_7sllb")
 script = ExtResource("2_fdh4r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDControl"]
 layout_mode = 2
 anchor_right = 1.0
 offset_bottom = 18.0
@@ -25,13 +27,13 @@ grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Money" type="Label" parent="HBoxContainer"]
+[node name="Money" type="Label" parent="HUDControl/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "R$ 0,00"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUDControl"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -43,7 +45,7 @@ grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="Ammo" type="Label" parent="HBoxContainer2"]
+[node name="Ammo" type="Label" parent="HUDControl/HBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2

@@ -13,7 +13,6 @@ func update_money_counter(value) -> void:
 
 
 static func get_currency(number : float) -> String:
-
 	var text = "%.2f" % number
 	text = text.replace(".", ",")
 	for idx in range(text.find(",") - 3, 0, -3):

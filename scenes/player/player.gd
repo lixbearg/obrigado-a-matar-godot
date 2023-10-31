@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 signal ammo_changed(value)
@@ -17,12 +18,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var floor_initial_position : int
 var player_facing_direction : int = 1
+var is_walking : bool = false
 var is_crouching : bool = false
 var ammo : int = 6
-var money : float = 0.0
 
 
 func _ready():
+	GameManager.player = self
 	floor_initial_position = shadow.global_position.y
 	reload_timer.timeout.connect(_on_weapon_reloaded)
 
@@ -32,7 +34,6 @@ func _physics_process(delta):
 
 	handle_movement(delta)
 	handle_jump(delta)
-	handle_crounching()
 	handle_shooting()
 	update_animations(input_axis)
 
@@ -43,9 +44,13 @@ func handle_movement(delta):
 
 	var direction = Input.get_axis("left", "right")
 	if direction:
+		is_walking = true
 		velocity.x = direction * SPEED
 	else:
+		is_walking = false
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	is_crouching = Input.is_action_pressed("crouch") and is_on_floor()
 
 	move_and_slide()
 
@@ -55,17 +60,13 @@ func handle_jump(delta):
 		velocity.y = JUMP_VELOCITY
 
 
-func handle_crounching():
-	is_crouching = Input.is_action_pressed("crouch") and is_on_floor()
-
-
 func handle_shooting():
 	if !reload_timer.is_stopped(): return
 	if Input.is_action_just_pressed("shoot"):
 		var bullet = BULLET.instantiate()
 		bullet.set_direction(player_facing_direction)
-		get_parent().add_child(bullet)
-		if is_crouching:
+		GameManager.add_object(bullet)
+		if is_crouching and !is_walking:
 			bullet.global_position.y = position.y - WEAPON_POS_CROUCHING.y
 			bullet.global_position.x = position.x + (player_facing_direction * WEAPON_POS_CROUCHING.x)
 		else:
@@ -96,7 +97,7 @@ func update_animations(input_axis):
 
 
 func update_money(value):
-	money += value
+	GameManager.current_money += value
 
 
 func reload_weapon():
