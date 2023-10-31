@@ -4,12 +4,26 @@ extends Control
 @onready var ammo = %Ammo
 
 
-func update_ammo_counter(value) -> void:
-	ammo.text = "x%s" % str(value)
+func _ready():
+	GameManager.money_changed.connect(_on_money_changed)
+	GameManager.ammo_changed.connect(_on_ammo_changed)
+	update_money_counter()
 
 
-func update_money_counter(value) -> void:
-	money.text = get_currency(value)
+func update_ammo_counter() -> void:
+	ammo.text = "x%s" % str(GameManager.current_ammo)
+
+
+func update_money_counter() -> void:
+	money.text = get_currency(GameManager.current_money)
+
+
+func _on_money_changed():
+	update_money_counter()
+
+
+func _on_ammo_changed():
+	update_ammo_counter()
 
 
 static func get_currency(number : float) -> String:

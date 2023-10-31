@@ -76,7 +76,7 @@ func handle_shooting():
 		ammo -= 1
 		if ammo == 0:
 			reload_weapon()
-		ammo_changed.emit(ammo)
+		GameManager.update_ammo(ammo)
 
 
 func update_animations(input_axis):
@@ -94,10 +94,6 @@ func update_animations(input_axis):
 
 	if not is_on_floor():
 		animated_sprite_2d.play("jump")
-
-
-func update_money(value):
-	GameManager.current_money += value
 
 
 func reload_weapon():
