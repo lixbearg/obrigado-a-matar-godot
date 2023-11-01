@@ -1,0 +1,2 @@
+class_name ActorSkin
+extends AnimatedSprite2D

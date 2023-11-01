@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cingtpaul0ae7"]
 
-[ext_resource type="Texture2D" uid="uid://31vfqfroslv" path="res://assets/sprites/background/level01_bg_back_layer.png" id="1_gvyn3"]
-[ext_resource type="Texture2D" uid="uid://div5gw2ax7hd5" path="res://assets/sprites/background/level01_bg_middle_layer.png" id="2_nkonl"]
-[ext_resource type="Texture2D" uid="uid://cswm2h3pltdhy" path="res://assets/sprites/background/level01_bg_front_layer.png" id="2_w5620"]
+[ext_resource type="Texture2D" uid="uid://31vfqfroslv" path="res://assets/sprites/background/level01_bg_back_layer.png" id="1_vpf1x"]
+[ext_resource type="Texture2D" uid="uid://div5gw2ax7hd5" path="res://assets/sprites/background/level01_bg_middle_layer.png" id="2_ws4pm"]
+[ext_resource type="Texture2D" uid="uid://cswm2h3pltdhy" path="res://assets/sprites/background/level01_bg_front_layer.png" id="3_4lib3"]
 
 [node name="Background" type="Node2D"]
 
@@ -15,7 +15,7 @@ motion_mirroring = Vector2(3000, 0)
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Back Layer"]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_gvyn3")
+texture = ExtResource("1_vpf1x")
 
 [node name="Middle Layer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
@@ -24,11 +24,11 @@ motion_mirroring = Vector2(3000, 0)
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Middle Layer"]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_nkonl")
+texture = ExtResource("2_ws4pm")
 
 [node name="Front Layer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Front Layer"]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_w5620")
+texture = ExtResource("3_4lib3")

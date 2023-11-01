@@ -1,11 +1,9 @@
 class_name Player
 extends Actor
 
-@onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var shadow = $Shadow
-@onready var reload_timer = $ReloadTimer
-@onready var weapon = $Weapon
-@onready var skin = $Skin
+@onready var shadow : Sprite2D = $Shadow
+@onready var weapon : Weapon = $Weapon
+@onready var skin : ActorSkin = $Skin
 
 
 const SPEED : float = 100.0
@@ -29,7 +27,7 @@ func _physics_process(delta):
 
 	handle_movement(delta)
 	handle_jump()
-	handle_shooting()
+	handle_attacking()
 	update_animations(input_axis)
 
 
@@ -55,9 +53,11 @@ func handle_jump():
 		velocity.y = JUMP_VELOCITY
 
 
-func handle_shooting():
+func handle_attacking():
 	if Input.is_action_just_pressed("shoot"):
 		weapon.shoot(player_facing_direction, is_crouching)
+	if Input.is_action_just_pressed("reload"):
+		weapon.reload()
 
 
 func update_animations(input_axis):

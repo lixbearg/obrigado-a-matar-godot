@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdp6ic71heycc"]
+
+[ext_resource type="Script" path="res://scenes/actor/actor_skin.gd" id="1_5ga4w"]
+
+[node name="ActorsSkin" type="AnimatedSprite2D"]
+script = ExtResource("1_5ga4w")
