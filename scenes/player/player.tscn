@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjv2yrs1wnxy0"]
+[gd_scene load_steps=10 format=3 uid="uid://cjv2yrs1wnxy0"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4fi5j"]
 [ext_resource type="PackedScene" uid="uid://bdp6ic71heycc" path="res://scenes/actor/actor_skin.tscn" id="2_t6w4x"]
 [ext_resource type="Texture2D" uid="uid://cjwx2imy3d6cw" path="res://assets/sprites/player/joao_shadow.png" id="4_rrxgl"]
+[ext_resource type="PackedScene" uid="uid://3cwgn66gymkt" path="res://scenes/components/hitbox_component.tscn" id="6_7tqdr"]
 [ext_resource type="SpriteFrames" uid="uid://cx6tru4oe8h46" path="res://scenes/player/skins/joao_amorim.tres" id="6_elww2"]
 [ext_resource type="PackedScene" uid="uid://bons0287n5dwl" path="res://scenes/player/weapon.tscn" id="6_s0tcu"]
+[ext_resource type="PackedScene" uid="uid://dx6tu6xnkjyk" path="res://scenes/components/health_component.tscn" id="7_bi0dc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsjyr"]
 size = Vector2(22, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bq60g"]
+size = Vector2(20, 62)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -26,3 +31,14 @@ texture = ExtResource("4_rrxgl")
 position = Vector2(0, -32)
 sprite_frames = ExtResource("6_elww2")
 animation = &"idle"
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_7tqdr")]
+collision_layer = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -31)
+shape = SubResource("RectangleShape2D_bq60g")
+debug_color = Color(0.984314, 0, 0.337255, 0.419608)
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_bi0dc")]

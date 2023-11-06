@@ -1,13 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://8iy41p2vipc"]
 
-[ext_resource type="PackedScene" uid="uid://buoy4c8tbbhko" path="res://scenes/world/levels/level.tscn" id="1_avcyp"]
 [ext_resource type="PackedScene" uid="uid://bn8sdvmk417ej" path="res://scenes/control/hud.tscn" id="2_ot6bl"]
 [ext_resource type="PackedScene" uid="uid://c50p827vuejpc" path="res://scenes/ui/pause_screen.tscn" id="3_kbvym"]
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="3_tcj37"]
+[ext_resource type="PackedScene" uid="uid://wddk4g8r8cwb" path="res://scenes/world/levels/level_01.tscn" id="4_a45j7"]
 
 [node name="Main" type="Node2D"]
-
-[node name="Level" parent="." instance=ExtResource("1_avcyp")]
 
 [node name="HUD" parent="." instance=ExtResource("2_ot6bl")]
 
@@ -18,3 +16,5 @@ script = ExtResource("3_tcj37")
 [node name="PauseScreen" parent="UI" instance=ExtResource("3_kbvym")]
 visible = false
 script = null
+
+[node name="Level 01" parent="." instance=ExtResource("4_a45j7")]

@@ -65,3 +65,6 @@ func update_animations(input_axis):
 
 	if not is_on_floor():
 		skin.play("jump")
+
+func die():
+	print("died!")
