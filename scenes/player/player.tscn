@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjv2yrs1wnxy0"]
+[gd_scene load_steps=11 format=3 uid="uid://cjv2yrs1wnxy0"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4fi5j"]
 [ext_resource type="PackedScene" uid="uid://bdp6ic71heycc" path="res://scenes/actor/actor_skin.tscn" id="2_t6w4x"]
@@ -7,6 +7,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cx6tru4oe8h46" path="res://scenes/player/skins/joao_amorim.tres" id="6_elww2"]
 [ext_resource type="PackedScene" uid="uid://bons0287n5dwl" path="res://scenes/player/weapon.tscn" id="6_s0tcu"]
 [ext_resource type="PackedScene" uid="uid://dx6tu6xnkjyk" path="res://scenes/components/health_component.tscn" id="7_bi0dc"]
+[ext_resource type="AudioStream" uid="uid://c1kdodypc1k80" path="res://assets/sfx/player_hurt.wav" id="8_uyej7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsjyr"]
 size = Vector2(22, 62)
@@ -42,3 +43,6 @@ shape = SubResource("RectangleShape2D_bq60g")
 debug_color = Color(0.984314, 0, 0.337255, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_bi0dc")]
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_uyej7")

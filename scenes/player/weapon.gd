@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var bullet_scene = preload("res://scenes/player/bullet.tscn")
 @onready var reload_timer = $ReloadTimer
+@onready var shoot_sfx = $ShootSFX
+@onready var reload_sfx = $ReloadSFX
 
 const WEAPON_POS_STANDING : Vector2i = Vector2i(15, 39)
 const WEAPON_POS_CROUCHING : Vector2i = Vector2i(27, 25)
@@ -31,10 +33,13 @@ func shoot(player_facing_direction : int, is_crouching : bool):
 	_set_ammo(_ammo - 1)
 	if _ammo == 0:
 		reload()
+	shoot_sfx.play()
 
 
 func reload():
-	reload_timer.start()
+	if _ammo < 6 and reload_timer.is_stopped():
+		reload_timer.start()
+		reload_sfx.play()
 
 
 func _on_weapon_reloaded():

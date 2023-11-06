@@ -9,6 +9,7 @@ func damage(attack : Attack):
 	if health_component:
 		health_component.damage(attack)
 #		knockback(attack)
+		get_parent().hurt_sfx.play()
 
 
 func knockback(attack : Attack):

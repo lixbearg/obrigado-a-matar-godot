@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcrwd86ixckph"]
+[gd_scene load_steps=8 format=3 uid="uid://bcrwd86ixckph"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_ysfct"]
 [ext_resource type="Texture2D" uid="uid://bs5eo3wty2ogy" path="res://assets/sprites/enemy/dummy.png" id="2_q6ndw"]
 [ext_resource type="PackedScene" uid="uid://dx6tu6xnkjyk" path="res://scenes/components/health_component.tscn" id="3_v7o8t"]
 [ext_resource type="PackedScene" uid="uid://3cwgn66gymkt" path="res://scenes/components/hitbox_component.tscn" id="4_65jak"]
+[ext_resource type="AudioStream" uid="uid://w04llos1xagv" path="res://assets/sfx/enemy_hurt.wav" id="5_a88o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vk5r"]
 size = Vector2(22, 61.5)
@@ -35,3 +36,6 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(-1.5, -40)
 shape = SubResource("RectangleShape2D_h4gir")
 debug_color = Color(0.972549, 0, 0.443137, 0.419608)
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_a88o3")

@@ -4,6 +4,8 @@ extends Actor
 @onready var shadow : Sprite2D = $Shadow
 @onready var weapon : Weapon = $Weapon
 @onready var skin : ActorSkin = $Skin
+@onready var hurt_sfx = $HurtSFX
+
 
 var default_skin = preload("res://scenes/player/skins/joao_amorim.tres")
 var floor_initial_position : int

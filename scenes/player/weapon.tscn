@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bons0287n5dwl"]
+[gd_scene load_steps=4 format=3 uid="uid://bons0287n5dwl"]
 
 [ext_resource type="Script" path="res://scenes/player/weapon.gd" id="1_k2p0v"]
+[ext_resource type="AudioStream" uid="uid://cgymvj4tytp8f" path="res://assets/sfx/revolver_shot.wav" id="2_xexco"]
+[ext_resource type="AudioStream" uid="uid://tycbeil066v0" path="res://assets/sfx/revolver_reload.wav" id="3_e3bpw"]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_k2p0v")
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xexco")
+
+[node name="ReloadSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e3bpw")

@@ -1,6 +1,8 @@
 class_name Enemy
 extends Actor
 
+@onready var hurt_sfx = $HurtSFX
+
 var money : float = randf_range(1.0, 5.0)
 
 
