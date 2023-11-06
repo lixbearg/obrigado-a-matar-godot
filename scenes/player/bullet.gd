@@ -4,7 +4,7 @@ extends Area2D
 const SPEED : int = 10
 var direction : int = 0
 var attack_damage : int = 1
-var knockback_force : int = 3
+var knockback_force : int = 100
 
 
 func set_direction(player_direction):

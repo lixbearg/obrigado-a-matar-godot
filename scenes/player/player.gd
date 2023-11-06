@@ -5,10 +5,6 @@ extends Actor
 @onready var weapon : Weapon = $Weapon
 @onready var skin : ActorSkin = $Skin
 
-
-const SPEED : float = 100.0
-const JUMP_VELOCITY : float = -350.0
-
 var default_skin = preload("res://scenes/player/skins/joao_amorim.tres")
 var floor_initial_position : int
 var player_facing_direction : int = 1
@@ -17,40 +13,34 @@ var is_crouching : bool = false
 
 
 func _ready():
-	GameManager.player = self
+	speed = 100.0
 	floor_initial_position = shadow.global_position.y
 	skin.set_sprite_frames(default_skin)
+	GameManager.player = self
 
 
 func _physics_process(delta):
 	var input_axis = Input.get_axis("left", "right")
-
 	handle_movement(delta)
 	handle_jump()
 	handle_attacking()
 	update_animations(input_axis)
+	super(delta)
 
 
 func handle_movement(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	var direction = Input.get_axis("left", "right")
+	direction = Input.get_axis("left", "right")
 	if direction:
 		is_walking = true
-		velocity.x = direction * SPEED
+		walk()
 	else:
 		is_walking = false
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	is_crouching = Input.is_action_pressed("crouch") and is_on_floor() and !direction
-
-	move_and_slide()
 
 
 func handle_jump():
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		jump()
 
 
 func handle_attacking():
