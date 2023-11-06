@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://buoy4c8tbbhko"]
+[gd_scene load_steps=7 format=3 uid="uid://buoy4c8tbbhko"]
 
 [ext_resource type="Script" path="res://scenes/world/levels/level.gd" id="1_dcwks"]
 [ext_resource type="PackedScene" uid="uid://cingtpaul0ae7" path="res://scenes/world/background.tscn" id="2_y7hjw"]
 [ext_resource type="PackedScene" uid="uid://cjv2yrs1wnxy0" path="res://scenes/player/player.tscn" id="3_pgp38"]
-[ext_resource type="PackedScene" uid="uid://bn8sdvmk417ej" path="res://scenes/control/hud.tscn" id="4_krqlh"]
 [ext_resource type="PackedScene" uid="uid://c4rns6uwmat1b" path="res://scenes/control/camera.tscn" id="6_twg0a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df64g"]
@@ -32,8 +31,6 @@ shape = SubResource("RectangleShape2D_df64g")
 [node name="Left wall" type="CollisionShape2D" parent="Limits"]
 position = Vector2(48.25, 128)
 shape = SubResource("RectangleShape2D_04vge")
-
-[node name="HUD" parent="." instance=ExtResource("4_krqlh")]
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_twg0a")]
 anchor_mode = 0
