@@ -15,4 +15,3 @@ func damage(attack : Attack):
 func knockback(attack : Attack):
 	get_parent().velocity.x += attack.knockback_force
 	get_parent().velocity.y -= 100
-

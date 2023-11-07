@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0u3xiog0oo8r"]
+
+[ext_resource type="PackedScene" uid="uid://bcrwd86ixckph" path="res://scenes/enemy/enemy.tscn" id="1_0a7nr"]
+[ext_resource type="Script" path="res://scenes/enemy/henchman/henchman.gd" id="2_rxu5o"]
+[ext_resource type="Script" path="res://scenes/enemy/henchman/states/henchman_idle.gd" id="3_l05nl"]
+[ext_resource type="Script" path="res://scenes/enemy/henchman/states/henchman_engage.gd" id="4_2v1ug"]
+
+[node name="Henchman" instance=ExtResource("1_0a7nr")]
+script = ExtResource("2_rxu5o")
+
+[node name="JumpTimer" type="Timer" parent="." index="4"]
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+wait_time = 1.5
+
+[node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Engage")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_l05nl")
+enemy = NodePath("../..")
+
+[node name="Engage" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_2v1ug")
+enemy = NodePath("../..")

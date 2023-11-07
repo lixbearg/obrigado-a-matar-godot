@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://wddk4g8r8cwb"]
 
 [ext_resource type="PackedScene" uid="uid://buoy4c8tbbhko" path="res://scenes/world/levels/level.tscn" id="1_48r8x"]
-[ext_resource type="PackedScene" uid="uid://b0u3xiog0oo8r" path="res://scenes/enemy/henchman.tscn" id="2_dc73e"]
+[ext_resource type="PackedScene" uid="uid://b0u3xiog0oo8r" path="res://scenes/enemy/henchman/henchman.tscn" id="2_dc73e"]
 
 [node name="Level 01" instance=ExtResource("1_48r8x")]
 
 [node name="Enemies" type="Node" parent="." index="4"]
 
 [node name="Henchman" parent="Enemies" index="0" instance=ExtResource("2_dc73e")]
-position = Vector2(528, 180)
+position = Vector2(223, 184)
 
 [node name="Henchman2" parent="Enemies" index="1" instance=ExtResource("2_dc73e")]
-position = Vector2(324, 182)
+position = Vector2(303, 184)
 
 [node name="Henchman3" parent="Enemies" index="2" instance=ExtResource("2_dc73e")]
-position = Vector2(648, 168)
+position = Vector2(367, 184)

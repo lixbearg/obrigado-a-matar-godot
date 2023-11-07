@@ -26,6 +26,7 @@ func _physics_process(delta):
 	handle_movement(delta)
 	handle_jump()
 	handle_attacking()
+	apply_friction(delta)
 	update_animations(input_axis)
 	super(delta)
 
@@ -50,6 +51,11 @@ func handle_attacking():
 		weapon.shoot(player_facing_direction, is_crouching)
 	if Input.is_action_just_pressed("reload"):
 		weapon.reload()
+
+
+func apply_friction(delta):
+	if direction == 0:
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 
 func update_animations(input_axis):
