@@ -18,6 +18,7 @@ func _ready():
 
 
 func shoot(player_facing_direction : int, is_crouching : bool):
+	print("Shoot!")
 	if !reload_timer.is_stopped(): return
 	var player_position = GameManager.get_player_position()
 	var bullet = bullet_scene.instantiate()

@@ -19,8 +19,8 @@ extends Enemy
 func _physics_process(delta):
 #	set_direction()
 #	walk()
-	if velocity.length() > 0:
-		print("run animation")
+#	if velocity.length() > 0:
+#		print("run animation")
 
 	sprite_2d.flip_h = velocity.x > 0
 	super(delta)

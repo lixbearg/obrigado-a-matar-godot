@@ -1,13 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjv2yrs1wnxy0"]
+[gd_scene load_steps=19 format=3 uid="uid://cjv2yrs1wnxy0"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4fi5j"]
 [ext_resource type="PackedScene" uid="uid://bdp6ic71heycc" path="res://scenes/actor/actor_skin.tscn" id="2_t6w4x"]
+[ext_resource type="Script" path="res://scenes/player/shadow.gd" id="3_76xwy"]
 [ext_resource type="Texture2D" uid="uid://cjwx2imy3d6cw" path="res://assets/sprites/player/joao_shadow.png" id="4_rrxgl"]
 [ext_resource type="PackedScene" uid="uid://3cwgn66gymkt" path="res://scenes/components/hitbox_component.tscn" id="6_7tqdr"]
 [ext_resource type="SpriteFrames" uid="uid://cx6tru4oe8h46" path="res://scenes/player/skins/joao_amorim.tres" id="6_elww2"]
 [ext_resource type="PackedScene" uid="uid://bons0287n5dwl" path="res://scenes/player/weapon.tscn" id="6_s0tcu"]
 [ext_resource type="PackedScene" uid="uid://dx6tu6xnkjyk" path="res://scenes/components/health_component.tscn" id="7_bi0dc"]
 [ext_resource type="AudioStream" uid="uid://c1kdodypc1k80" path="res://assets/sfx/player_hurt.wav" id="8_uyej7"]
+[ext_resource type="Script" path="res://scenes/actor/state_machine.gd" id="9_bgxvh"]
+[ext_resource type="Script" path="res://scenes/player/states/player_idle.gd" id="10_pucx8"]
+[ext_resource type="Script" path="res://scenes/player/states/player_base_state.gd" id="11_bjxpk"]
+[ext_resource type="Script" path="res://scenes/player/states/player_walk.gd" id="12_18br7"]
+[ext_resource type="Script" path="res://scenes/player/states/player_crouch.gd" id="13_u6x8o"]
+[ext_resource type="Script" path="res://scenes/player/states/player_jump.gd" id="14_a88pi"]
+[ext_resource type="Script" path="res://scenes/player/states/player_shoot.gd" id="16_7p3i7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsjyr"]
 size = Vector2(22, 62)
@@ -25,6 +33,7 @@ shape = SubResource("RectangleShape2D_xsjyr")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("4_rrxgl")
+script = ExtResource("3_76xwy")
 
 [node name="Weapon" parent="." instance=ExtResource("6_s0tcu")]
 
@@ -46,3 +55,25 @@ debug_color = Color(0.984314, 0, 0.337255, 0.419608)
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_uyej7")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_bgxvh")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("10_pucx8")
+
+[node name="PlayerBaseState" type="Node" parent="StateMachine"]
+script = ExtResource("11_bjxpk")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("12_18br7")
+
+[node name="Crouch" type="Node" parent="StateMachine"]
+script = ExtResource("13_u6x8o")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("14_a88pi")
+
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("16_7p3i7")
